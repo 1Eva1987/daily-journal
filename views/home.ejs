@@ -9,7 +9,9 @@
         <%= item.postTitle %>
     </h3>
     <p>
-        <%= item.postText %>
+        <%= item.postText.substring(0, 100) + " ..." %> 
+    <a href="/posts/<%= lodash.kebabCase(item.postTitle) %>">Read More</a>
+
     </p>
     </div>
 <% }) %>

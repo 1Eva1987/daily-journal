@@ -1,11 +1,12 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const _ = require("lodash");
+const ejs = require("ejs");
 const app = express();
 
-app.use(express.static("public"));
-app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static("public"));
 
 const homeContent =
   "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos amet deserunt repellendus illo nostrum aliquam laboriosam reiciendis illum fuga quos ea enim, et doloribus doloremque officia labore voluptate quaerat excepturi!";
@@ -16,7 +17,7 @@ const contactContent =
 const posts = [];
 
 app.get("/", (req, res) => {
-  res.render("home", { homeText: homeContent, postsArray: posts });
+  res.render("home", { homeText: homeContent, postsArray: posts, lodash: _ });
 });
 
 app.get("/about", (req, res) => {
@@ -50,9 +51,6 @@ app.get("/posts/:post", (req, res) => {
         postTitle: posts[i].postTitle,
         postText: posts[i].postText,
       });
-      console.log("match found");
-    } else {
-      console.log("no");
     }
   }
 });
