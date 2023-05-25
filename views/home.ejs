@@ -1,0 +1,16 @@
+<%- include("./partials/header") -%>
+<div class="home">
+    <h1>Home</h1>
+    <p> <%= homeText %> </p>
+</div>
+<% postsArray.forEach((item)=>{ %>
+    <div class="post">
+    <h3>
+        <%= item.postTitle %>
+    </h3>
+    <p>
+        <%= item.postText %>
+    </p>
+    </div>
+<% }) %>
+<%- include("./partials/footer") -%>
