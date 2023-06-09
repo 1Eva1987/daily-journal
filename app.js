@@ -56,6 +56,7 @@ app.get("/compose", (req, res) => {
   res.render("compose");
 });
 
+// Creatin post and rendering it in home route
 app.post("/compose", (req, res) => {
   const postTitle = req.body.title;
   const postText = req.body.textarea;
@@ -66,21 +67,18 @@ app.post("/compose", (req, res) => {
     .catch((err) => console.log(err));
 });
 
-app.get("/posts/:post", (req, res) => {
-  console.log(req.params.post);
-  Post.find({}).then((posts) => {
-    for (let i = 0; i < posts.length; i++) {
-      if (
-        _.replace(posts[i].name, " ", "-").toLocaleLowerCase() ===
-        req.params.post
-      ) {
-        res.render("post", {
-          postTitle: posts[i].name,
-          postText: posts[i].text,
-        });
-      }
-    }
-  });
+// Read more: finding end rendering the post depending on id
+app.get("/posts/:postId", (req, res) => {
+  console.log(req.params.postId);
+  const requestedPostId = req.params.postId;
+  Post.findOne({ _id: requestedPostId })
+    .then((post) => {
+      res.render("post", {
+        postTitle: post.name,
+        postText: post.text,
+      });
+    })
+    .catch((err) => console.log(err));
 });
 
 app.listen(3000, () => {
