@@ -6,11 +6,11 @@
 <% postsArray.forEach((item)=>{ %>
     <div class="post">
     <h3>
-        <%= item.postTitle %>
+        <%= item.name %>
     </h3>
     <p>
-        <%= item.postText.substring(0, 100) + " ..." %> 
-    <a href="/posts/<%= lodash.kebabCase(item.postTitle) %>">Read More</a>
+        <%= item.text.substring(0, 100) + " ..." %> 
+    <a href="/posts/<%= lodash.kebabCase(item.name) %>">Read More</a>
 
     </p>
     </div>
